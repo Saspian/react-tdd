@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/signup.css';
 
 const Signup = () => {
   let navigate = useNavigate();
@@ -23,10 +24,10 @@ const Signup = () => {
     })
   }
   return (
-    <main>
-      Signup
-      <section>
-        <form onSubmit={submitHandler}>
+    <main className='signup-page'>
+      <h3>Signup</h3>
+      <section className='form-section'>
+        <form className='form' onSubmit={submitHandler}>
           <label htmlFor="username">Username</label>
           <input type="text" value={userDetail.username} id="username" name="username" onChange={changeHandler} data-testid="username" />
           <br />
