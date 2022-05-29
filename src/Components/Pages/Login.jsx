@@ -5,6 +5,7 @@ import { baseurl } from "../API/config";
 
 const Login = () => {
   let navigate = useNavigate();
+  console.log(baseurl, "@@baseURl");
   const [userDetail, setUserDetail] = useState({
     username: "",
     password: "",
@@ -16,7 +17,7 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:4000/user/login`, {
+    const response = await fetch(`${baseurl}/user/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -27,8 +28,8 @@ const Login = () => {
         password: userDetail.password,
       }),
     });
-    // const data = await response;
-    navigate(`/welcome/${response.data}`);
+    const data = await response.json();
+    navigate(`/welcome/${data.username}`);
     setUserDetail({
       username: "",
       password: "",
