@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/signup.css";
+import { baseurl } from "../API/config";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -13,9 +14,21 @@ const Login = () => {
     setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    navigate(`/welcome/${userDetail.username}`);
+    const response = await fetch(`http://localhost:4000/user/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userDetail.username,
+        password: userDetail.password,
+      }),
+    });
+    // const data = await response;
+    navigate(`/welcome/${response.data}`);
     setUserDetail({
       username: "",
       password: "",
