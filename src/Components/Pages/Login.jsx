@@ -7,7 +7,7 @@ import loader from "../../assets/loader.svg";
 const Login = () => {
   let navigate = useNavigate();
   const [userDetail, setUserDetail] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -27,15 +27,15 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: userDetail.username,
+        email: userDetail.email,
         password: userDetail.password,
       }),
     });
     const data = await response.json();
     setLoading(false);
-    navigate(`/welcome/${data.username}`);
+    navigate(`/welcome/${data.email}`);
     setUserDetail({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -43,15 +43,15 @@ const Login = () => {
     <main className="signup-page">
       <section className="form-section">
         <form className="form" onSubmit={submitHandler}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
-            value={userDetail.username}
-            id="username"
-            name="username"
+            value={userDetail.email}
+            id="email"
+            name="email"
             className="p-1.5"
             onChange={changeHandler}
-            data-testid="username"
+            data-testid="email"
           />
           <br />
           <label htmlFor="password">Password</label>

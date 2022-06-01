@@ -6,7 +6,7 @@ import loader from "../../assets/loader.svg";
 const Signup = () => {
   let navigate = useNavigate();
   const [userDetail, setUserDetail] = useState({
-    username: "",
+    email: "",
     password: "",
     rpassword: "",
   });
@@ -21,9 +21,9 @@ const Signup = () => {
     setLoading(true);
     //submitting signup data
     setLoading(false);
-    navigate(`/welcome/${userDetail.username}`);
+    navigate(`/welcome/${userDetail.email}`);
     setUserDetail({
-      username: "",
+      email: "",
       password: "",
       rpassword: "",
     });
@@ -32,15 +32,15 @@ const Signup = () => {
     <main className="signup-page">
       <section className="form-section">
         <form className="form" onSubmit={submitHandler}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
-            value={userDetail.username}
-            id="username"
+            value={userDetail.email}
+            id="email"
             className="p-1.5"
-            name="username"
+            name="email"
             onChange={changeHandler}
-            data-testid="username"
+            data-testid="email"
           />
           <br />
           <label htmlFor="password">Password</label>
