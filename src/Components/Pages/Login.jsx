@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/signup.css";
 import { baseurl } from "../API/config";
+import loader from "../../assets/loader.svg";
 
 const Login = () => {
   let navigate = useNavigate();
-  console.log(baseurl, "@@baseURl");
   const [userDetail, setUserDetail] = useState({
     username: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const changeHandler = (e) => {
     setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
@@ -17,6 +19,7 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const response = await fetch(`${baseurl}/user/login`, {
       method: "POST",
       headers: {
@@ -29,6 +32,7 @@ const Login = () => {
       }),
     });
     const data = await response.json();
+    setLoading(false);
     navigate(`/welcome/${data.username}`);
     setUserDetail({
       username: "",
@@ -45,6 +49,7 @@ const Login = () => {
             value={userDetail.username}
             id="username"
             name="username"
+            className="p-1.5"
             onChange={changeHandler}
             data-testid="username"
           />
@@ -55,11 +60,19 @@ const Login = () => {
             value={userDetail.password}
             id="password"
             name="password"
+            className="p-1.5"
             onChange={changeHandler}
             data-testid="password"
           />
           <br />
-          <input type="submit" data-testid="signupButton" label="Login" />
+          <button
+            type="submit"
+            data-testid="loginButton"
+            className="bg-primary flex items-center justify-center rounded-md text-white"
+          >
+            {loading ? <img src={loader} alt="loder" width="40" /> : ""}
+            <p className="py-2">Login</p>
+          </button>
           <p className="alreadyLogin">
             Create account <Link to="/signup"> Sign Up</Link>
           </p>

@@ -31,7 +31,6 @@ input {
 }
 
 input[type="submit"] {
-  background: none;
   border: none;
   color: white;
   border-radius: 4px;

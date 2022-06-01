@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/signup.css";
+import loader from "../../assets/loader.svg";
 
 const Signup = () => {
   let navigate = useNavigate();
@@ -9,6 +10,7 @@ const Signup = () => {
     password: "",
     rpassword: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const changeHandler = (e) => {
     setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
@@ -16,6 +18,9 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
+    //submitting signup data
+    setLoading(false);
     navigate(`/welcome/${userDetail.username}`);
     setUserDetail({
       username: "",
@@ -32,6 +37,7 @@ const Signup = () => {
             type="text"
             value={userDetail.username}
             id="username"
+            className="p-1.5"
             name="username"
             onChange={changeHandler}
             data-testid="username"
@@ -42,6 +48,7 @@ const Signup = () => {
             type="password"
             value={userDetail.password}
             id="password"
+            className="p-1.5"
             name="password"
             onChange={changeHandler}
             data-testid="password"
@@ -52,12 +59,20 @@ const Signup = () => {
             type="password"
             value={userDetail.rpassword}
             id="rpassword"
+            className="p-1.5"
             name="rpassword"
             onChange={changeHandler}
             data-testid="rpassword"
           />
           <br />
-          <input type="submit" data-testid="signupButton" label="Sign Up" />
+          <button
+            type="submit"
+            data-testid="signupButton"
+            className="bg-primary flex items-center justify-center rounded-md text-white"
+          >
+            {loading ? <img src={loader} alt="loder" width="40" /> : ""}
+            <p className="py-2">Sign Up</p>
+          </button>
           <p className="alreadyLogin">
             Already signup? <Link to="/login"> Login</Link>
           </p>
