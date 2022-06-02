@@ -10,10 +10,12 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const changeHandler = (e) => {
+    setError("");
     setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
   };
 
@@ -32,8 +34,20 @@ const Login = () => {
       }),
     });
     const data = await response.json();
+    if (response.status !== 200) {
+      setLoading(false);
+      setError(data.message);
+      return;
+    }
     setLoading(false);
-    navigate(`/welcome/${data.email}`);
+    let authData = {
+      token: data.token,
+      refreshToken: data.refreshToken,
+    };
+    localStorage.setItem("twj", JSON.stringify(authData));
+    localStorage.setItem("_uid", data.id);
+    navigate(`/welcome/${data.username}`);
+    setError("");
     setUserDetail({
       email: "",
       password: "",
@@ -73,7 +87,12 @@ const Login = () => {
             {loading ? <img src={loader} alt="loder" width="40" /> : ""}
             <p className="py-2">Login</p>
           </button>
-          <p className="alreadyLogin">
+          {error ? (
+            <span className="text-red-500 pt-1">{error}</span>
+          ) : (
+            <span className="pb-3"></span>
+          )}
+          <p className="">
             Create account <Link to="/signup"> Sign Up</Link>
           </p>
         </form>

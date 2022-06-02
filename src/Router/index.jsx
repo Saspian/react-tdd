@@ -1,21 +1,14 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import AppRouter from "../Components/AppRouter";
 import Navigation from "../Components/Navigation";
-import Login from "../Components/Pages/Login";
-import Signup from "../Components/Pages/Signup";
-import Welcome from "../Components/Welcome";
 
-const NavRouter = () => {
+const AppLayout = () => {
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/signup" exact element={<Signup />} />
-        <Route path="/welcome/:username" exact element={<Welcome />} />
-      </Routes>
+      <AppRouter />
     </>
   );
 };
 
-export default NavRouter;
+export default AppLayout;

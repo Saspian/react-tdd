@@ -1,24 +1,19 @@
-import React, { useState } from "react";
-import { Navigate, Route } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [isAuth, setIsAuth] = useState(false);
+export const ProtectedRoute = ({ children }) => {
+  const auth = localStorage.getItem("twj");
+  try {
+    if (auth) {
+      jwt_decode(JSON.parse(auth).token);
+      return children;
+    }
+  } catch (err) {
+    <Navigate to="/login" replace={true} />;
+  }
 
-  const authToken = localStorage.getItem("token");
-  setIsAuth(authToken);
-
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (isAuth) {
-          return <Component {...props} />;
-        } else {
-          return <Navigate replace to="/login" />;
-        }
-      }}
-    />
-  );
+  return <Navigate to="/login" replace={true} />;
 };
 
 export default ProtectedRoute;
