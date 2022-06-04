@@ -1,13 +1,16 @@
 .signup-page{
   width: 100vw;
+  height: 90vh;
   text-align: center;
 }
 
 .form-section{
   width: inherit;
-  margin: 10px 0px;
+  height: inherit;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .form {

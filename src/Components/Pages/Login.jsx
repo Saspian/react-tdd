@@ -56,6 +56,7 @@ const Login = () => {
   return (
     <main className="signup-page">
       <section className="form-section">
+        <div className="font-medium text-2xl mb-4">Login</div>
         <form className="form" onSubmit={submitHandler}>
           <label htmlFor="email">Email</label>
           <input
@@ -63,11 +64,10 @@ const Login = () => {
             value={userDetail.email}
             id="email"
             name="email"
-            className="p-1.5"
+            className="p-1.5 mb-4"
             onChange={changeHandler}
             data-testid="email"
           />
-          <br />
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -82,7 +82,8 @@ const Login = () => {
           <button
             type="submit"
             data-testid="loginButton"
-            className="bg-primary flex items-center justify-center rounded-md text-white"
+            disabled={loading}
+            className="bg-primary flex items-center justify-center rounded-md text-white mx-1.5"
           >
             {loading ? <img src={loader} alt="loder" width="40" /> : ""}
             <p className="py-2">Login</p>

@@ -11,6 +11,7 @@ const Signup = () => {
     rpassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const changeHandler = (e) => {
     setUserDetail({ ...userDetail, [e.target.name]: e.target.value });
@@ -20,6 +21,7 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     //submitting signup data
+    setError("Error from response");
     setLoading(false);
     navigate(`/welcome/${userDetail.email}`);
     setUserDetail({
@@ -31,29 +33,28 @@ const Signup = () => {
   return (
     <main className="signup-page">
       <section className="form-section">
+        <div className="font-medium text-2xl mb-4">Sign Up</div>
         <form className="form" onSubmit={submitHandler}>
           <label htmlFor="email">Email</label>
           <input
             type="text"
             value={userDetail.email}
             id="email"
-            className="p-1.5"
+            className="p-1.5 mb-4"
             name="email"
             onChange={changeHandler}
             data-testid="email"
           />
-          <br />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             value={userDetail.password}
             id="password"
-            className="p-1.5"
+            className="p-1.5 mb-4"
             name="password"
             onChange={changeHandler}
             data-testid="password"
           />
-          <br />
           <label htmlFor="rpassword">Repeat Password</label>
           <input
             type="password"
@@ -68,11 +69,17 @@ const Signup = () => {
           <button
             type="submit"
             data-testid="signupButton"
-            className="bg-primary flex items-center justify-center rounded-md text-white"
+            disabled={loading}
+            className="bg-primary flex items-center justify-center rounded-md text-white mx-1.5"
           >
             {loading ? <img src={loader} alt="loder" width="40" /> : ""}
             <p className="py-2">Sign Up</p>
           </button>
+          {error ? (
+            <span className="text-red-500 pt-1">{error}</span>
+          ) : (
+            <span className="pb-3"></span>
+          )}
           <p className="alreadyLogin">
             Already signup? <Link to="/login"> Login</Link>
           </p>
