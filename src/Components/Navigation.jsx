@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/navigation.css";
+import powerBtn from "../assets/power-btn.svg";
 
-const Navigation = (props) => {
-  let location = useLocation();
-  const [links, setLinks] = useState("");
+const Navigation = () => {
+  let navigate = useNavigate();
 
-  useEffect(() => {
-    if (location.pathname === "/login") {
-      setLinks("Login");
-    } else if (location.pathname === "/signup") {
-      setLinks("Sign Up");
-    } else {
-      setLinks("Welcome");
-    }
-  }, [location]);
-  return <nav className="navbar">{links}</nav>;
+  const handleClick = () => {
+    localStorage.clear();
+    navigate(`/login`);
+  };
+  return (
+    <nav className="navbar">
+      <div>Welcome</div>
+      <div className="div"></div>
+      <img
+        src={powerBtn}
+        alt="power off btn"
+        width="15"
+        onClick={handleClick}
+        title="Logout"
+        className="cursor-pointer"
+      />
+    </nav>
+  );
 };
 
 export default Navigation;

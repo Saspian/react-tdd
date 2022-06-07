@@ -1,11 +1,11 @@
 .navbar {
   width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #5762E5;
   color: white;
-  padding: 10px 0px;
+  padding: 10px 20px;
 }
 
 a{
