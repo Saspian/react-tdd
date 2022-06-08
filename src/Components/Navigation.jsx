@@ -5,6 +5,7 @@ import powerBtn from "../assets/power-btn.svg";
 
 const Navigation = () => {
   let navigate = useNavigate();
+  const state = JSON.parse(localStorage.getItem("perState"));
 
   const handleClick = () => {
     localStorage.clear();
@@ -12,7 +13,7 @@ const Navigation = () => {
   };
   return (
     <nav className="navbar">
-      <div>Welcome</div>
+      <div>Welcome {state.user.username}</div>
       <div className="div"></div>
       <img
         src={powerBtn}

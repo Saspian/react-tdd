@@ -44,9 +44,16 @@ const Login = () => {
       token: data.token,
       refreshToken: data.refreshToken,
     };
+    let perState = {
+      user: {
+        username: data.username,
+        _uid: data.id,
+        role: data.role,
+      },
+    };
     localStorage.setItem("twj", JSON.stringify(authData));
-    localStorage.setItem("_uid", data.id);
-    navigate(`/welcome/${data.username}`);
+    localStorage.setItem("perState", JSON.stringify(perState));
+    navigate(`/welcome`);
     setError("");
     setUserDetail({
       email: "",

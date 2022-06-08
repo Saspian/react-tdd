@@ -6,7 +6,6 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" exact element={<Welcome />} />
-      <Route path="/welcome/:username" exact element={<Welcome />} />
     </Routes>
   );
 };
