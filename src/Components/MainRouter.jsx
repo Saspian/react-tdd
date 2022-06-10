@@ -5,6 +5,9 @@ import ProtectedRoute from "./Common/ProtectedRoute";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import AuthRoute from "./Common/AuthRoute";
+import Dashboard from "./Pages/Dashboard";
+import AdminRoute from "./Common/AdminRoute";
+import Navigation from "./Navigation";
 
 const MainRouter = () => {
   return (
@@ -25,6 +28,16 @@ const MainRouter = () => {
           <AuthRoute>
             <Signup />
           </AuthRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        exact
+        element={
+          <AdminRoute>
+            <Navigation />
+            <Dashboard />
+          </AdminRoute>
         }
       />
       <Route

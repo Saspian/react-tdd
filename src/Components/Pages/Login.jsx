@@ -53,7 +53,11 @@ const Login = () => {
     };
     localStorage.setItem("twj", JSON.stringify(authData));
     localStorage.setItem("perState", JSON.stringify(perState));
-    navigate(`/`);
+    if (data.role === "admin") {
+      navigate("/dashboard");
+    } else {
+      navigate(`/`);
+    }
     setError("");
     setUserDetail({
       email: "",

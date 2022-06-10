@@ -10,7 +10,8 @@ export const auth = () => {
 }
 
 export const role = () => {
-  const user = localStorage.getItem("perState");
-  const role = JSON.parse(user).user.role;
+  const persistenceState = localStorage.getItem("perState");
+  const rawRole = JSON.parse(persistenceState);
+  const role = rawRole?.user?.role ? rawRole.user.role : 'guest';
   return role;
 }
