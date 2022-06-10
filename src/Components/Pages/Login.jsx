@@ -53,7 +53,7 @@ const Login = () => {
     };
     localStorage.setItem("twj", JSON.stringify(authData));
     localStorage.setItem("perState", JSON.stringify(perState));
-    navigate(`/welcome`);
+    navigate(`/`);
     setError("");
     setUserDetail({
       email: "",
