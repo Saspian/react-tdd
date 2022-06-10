@@ -8,3 +8,9 @@ export const auth = () => {
   }
   return false;
 }
+
+export const role = () => {
+  const user = localStorage.getItem("perState");
+  const role = JSON.parse(user).user.role;
+  return role;
+}
