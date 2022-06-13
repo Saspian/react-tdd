@@ -22,47 +22,52 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch(`${baseurl}/user/login`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userDetail.email,
-        password: userDetail.password,
-      }),
-    });
-    const data = await response.json();
-    if (response.status !== 200) {
+    try {
+      const response = await fetch(`${baseurl}/user/login`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userDetail.email,
+          password: userDetail.password,
+        }),
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        setLoading(false);
+        setError(data.message);
+        return;
+      }
       setLoading(false);
-      setError(data.message);
-      return;
+      let authData = {
+        token: data.token,
+        refreshToken: data.refreshToken,
+      };
+      let perState = {
+        user: {
+          username: data.username,
+          _uid: data.id,
+          role: data.role,
+        },
+      };
+      localStorage.setItem("twj", JSON.stringify(authData));
+      localStorage.setItem("perState", JSON.stringify(perState));
+      setError("");
+      setUserDetail({
+        email: "",
+        password: "",
+      });
+      if (data.role === "admin") {
+        navigate("/dashboard");
+      } else {
+        navigate(`/`);
+      }
+    } catch (error) {
+      setLoading(false);
+      setError("Something went wrong... please try again");
     }
-    setLoading(false);
-    let authData = {
-      token: data.token,
-      refreshToken: data.refreshToken,
-    };
-    let perState = {
-      user: {
-        username: data.username,
-        _uid: data.id,
-        role: data.role,
-      },
-    };
-    localStorage.setItem("twj", JSON.stringify(authData));
-    localStorage.setItem("perState", JSON.stringify(perState));
-    if (data.role === "admin") {
-      navigate("/dashboard");
-    } else {
-      navigate(`/`);
-    }
-    setError("");
-    setUserDetail({
-      email: "",
-      password: "",
-    });
   };
   return (
     <main className="signup-page">
