@@ -39,3 +39,11 @@ input[type="submit"] {
   border-radius: 4px;
   background: #5762E5;
 }
+
+.signup-page a {
+  text-decoration: none;
+}
+
+.signup-page a:visited {
+  color: #5762E5;
+}

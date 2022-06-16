@@ -1,7 +1,7 @@
 import React from "react";
 
 const Dashboard = () => {
-  return <section>Dashboard - only for admin</section>;
+  return <section className="px-5">Dashboard - only for admin</section>;
 };
 
 export default Dashboard;
